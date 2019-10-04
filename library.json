@@ -1,0 +1,23 @@
+{
+    "name": "SafeTransfer",
+    "keywords": "I2C, CRC16",
+    "description": "Fast and safe generic wrapper for sending complex data structures via I2C.",
+    "authors":
+    [
+      {
+        "name": "Marci Bedo",
+        "email": "bedomarci@gmail.com",
+        "url": "https://github.com/bedomarci",
+        "maintainer": true
+      }
+    ],
+    "dependencies": [
+        {
+            "6497": "*"
+        }
+    ],
+    "version": "1.0",
+    "frameworks": "arduino",
+    "platforms": "*"
+  }
+  
