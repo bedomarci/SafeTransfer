@@ -116,14 +116,14 @@ void SafeTransfer<T>::loop() {
 template <typename T>
 void SafeTransfer<T>::receive(uint8_t **buffer) {
     PacketType type = (PacketType)*buffer[0];
-    Serial.println(uint8_t(type));
+//    Serial.println(uint8_t(type));
     switch (type)
     {
     case DATA:
         if (!_receiveCallback) return;
         T data;
         bufferToData(buffer, &data);
-        Serial.println(data);
+//        Serial.println(data);
         if (isCrcValid(buffer)) {
             _receiveCallback(data);
         } else {
