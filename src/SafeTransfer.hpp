@@ -16,12 +16,12 @@ private:
     typedef T (*ST_REQUEST_CB_SIG)();
     ST_RECEIVE_CB_SIG _receiveCallback;
     ST_REQUEST_CB_SIG _requestCallback;
-    enum PacketType {
+    typedef enum {
         DATA = 0,
         ACK = 1,
         ERROR = 2,
         RETRY = 3,
-    };
+    } PacketType;
     TwoWire *_wire = nullptr;
     FastCRC16 CRC16;
 
@@ -109,6 +109,7 @@ void SafeTransfer<T>::loop() {
             _buffer[bufferIndex++] =  Wire.read();
         }
         receive(&_buffer);
+        delete(_buffer);
     }
 }
 
