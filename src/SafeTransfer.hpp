@@ -16,12 +16,12 @@ private:
     typedef T (*ST_REQUEST_CB_SIG)();
     ST_RECEIVE_CB_SIG _receiveCallback;
     ST_REQUEST_CB_SIG _requestCallback;
-    enum PacketType {
+    typedef enum {
         DATA = 0,
         ACK = 1,
         ERROR = 2,
         RETRY = 3,
-    };
+    } PacketType;
     TwoWire *_wire = nullptr;
     FastCRC16 CRC16;
 
@@ -113,20 +113,21 @@ void SafeTransfer<T>::loop() {
             _buffer[bufferIndex++] =  Wire.read();
         }
         receive(&_buffer);
+        delete(_buffer);
     }
 }
 
 template <typename T>
 void SafeTransfer<T>::receive(uint8_t **buffer) {
     PacketType type = (PacketType)*buffer[0];
-    Serial.println(uint8_t(type));
+//    Serial.println(uint8_t(type));
     switch (type)
     {
     case DATA:
         if (!_receiveCallback) return;
         T data;
         bufferToData(buffer, &data);
-        Serial.println(data);
+//        Serial.println(data);
         if (isCrcValid(buffer)) {
             _receiveCallback(data);
         } else {
