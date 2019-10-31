@@ -37,6 +37,8 @@ private:
     void poll();
     bool isCrcValid(uint8_t ** buffer);
 
+
+
 public:
     SafeTransfer();
     void begin(TwoWire *wire);
@@ -91,7 +93,9 @@ bool SafeTransfer<T>::isCrcValid(uint8_t ** buffer) {
 template <typename T>
 void SafeTransfer<T>::begin(TwoWire *wire) {
     this->_wire = wire;
+#ifndef ESP32
     this->_wire->onReceive([=](int){});
+#endif
 }
 
 template <typename T>
