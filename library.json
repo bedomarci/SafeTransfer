@@ -13,7 +13,8 @@
     ],
     "dependencies": [
       {
-        "name": "6497"
+        "name": "FastCRC",
+        "id": 6497
       }
     ],
     "version": "1.0",
