@@ -13,7 +13,8 @@
     ],
     "dependencies": [
       {
-        "name": 6497,
+        "name": "FastCRC",
+        "authors": "Frank Bösing"
       }
     ],
     "version": "1.0",
