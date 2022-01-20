@@ -94,7 +94,8 @@ template <typename T>
 void SafeTransfer<T>::begin(TwoWire *wire) {
     this->_wire = wire;
 #ifndef ESP32
-    this->_wire->onReceive([=](int){});
+    //TODO cannot use lambda callback. Need to implement
+    //this->_wire->onReceive([=](int){});
 #endif
 }
 
@@ -106,11 +107,11 @@ void SafeTransfer<T>::setAddress(uint8_t address) {
 template <typename T>
 void SafeTransfer<T>::loop() {
     if (!_wire) return;
-    if (Wire.available()) {
+    if (_wire->available()) {
         uint8_t bufferIndex = 0;
         _buffer = new uint8_t[packetSize];
-        while (0 < Wire.available()) {
-            _buffer[bufferIndex++] =  Wire.read();
+        while (0 < _wire->available()) {
+            _buffer[bufferIndex++] =  _wire->read();
         }
         receive(&_buffer);
         delete(_buffer);
